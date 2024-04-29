@@ -1,13 +1,20 @@
 package com.example.addressbook.controller;
 
-import com.example.addressbook.model.*;
+import com.example.addressbook.model.Contact;
+import com.example.addressbook.model.ContactManager;
+import com.example.addressbook.model.SqliteContactDAO;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
 import java.util.List;
 
+/**
+ * Controller class for the main view of the address book application.
+ */
 public class MainController {
     @FXML
     private ListView<Contact> contactsListView;
@@ -24,6 +31,10 @@ public class MainController {
     private VBox contactContainer;
     @FXML
     private TextField searchTextField;
+
+    /**
+     * Constructor for the MainController class. Initializes the contact manager.
+     */
     public MainController() {
         contactManager = new ContactManager(new SqliteContactDAO());
     }
@@ -95,6 +106,9 @@ public class MainController {
         contactContainer.setVisible(hasContact);
     }
 
+    /**
+     * Initializes the main view.
+     */
     @FXML
     public void initialize() {
         contactsListView.setCellFactory(this::renderCell);
@@ -108,6 +122,10 @@ public class MainController {
         searchTextField.textProperty().addListener((observable, oldValue, newValue) -> syncContacts());
     }
 
+    /**
+     * Event handler for the edit confirm button.
+     * Updates the contact's information in the database.
+     */
     @FXML
     private void onEditConfirm() {
         // Get the selected contact from the list view
@@ -122,6 +140,10 @@ public class MainController {
         }
     }
 
+    /**
+     * Event handler for the delete button.
+     * Deletes the selected contact from the database.
+     */
     @FXML
     private void onDelete() {
         // Get the selected contact from the list view
@@ -132,6 +154,10 @@ public class MainController {
         }
     }
 
+    /**
+     * Event handler for the add button.
+     * Adds a new contact to the database.
+     */
     @FXML
     private void onAdd() {
         // Default values for a new contact
@@ -149,6 +175,10 @@ public class MainController {
         firstNameTextField.requestFocus();
     }
 
+    /**
+     * Event handler for the cancel button.
+     * Cancels the edit operation and refreshes the text fields with the selected contact's information.
+     */
     @FXML
     private void onCancel() {
         // Find the selected contact

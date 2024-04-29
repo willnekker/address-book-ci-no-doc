@@ -9,6 +9,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Controller class for the Hello application.
+ */
 public class HelloController {
     @FXML
     private TextArea termsAndConditions;
@@ -16,6 +19,10 @@ public class HelloController {
     private CheckBox agreeCheckBox;
     @FXML
     private Button nextButton;
+
+    /**
+     * Initializes the controller. Sets the terms and conditions text.
+     */
     @FXML
     public void initialize() {
         termsAndConditions.setText("""
@@ -36,12 +43,22 @@ Lorem sed risus ultricies tristique nulla aliquet.
 Elementum nibh tellus molestie nunc non blandit massa.""");
     }
 
+    /**
+     * Event handler for the agree checkbox click event.
+     * Enables or disables the next button based on checkbox selection.
+     */
     @FXML
     protected void onAgreeCheckBoxClick() {
         boolean accepted = agreeCheckBox.isSelected();
         nextButton.setDisable(!accepted);
     }
 
+    /**
+     * Event handler for the next button click event.
+     * Redirects to the main view.
+     *
+     * @throws IOException if an error occurs during loading the FXML file
+     */
     @FXML
     protected void onNextButtonClick() throws IOException {
         Stage stage = (Stage) nextButton.getScene().getWindow();
@@ -50,6 +67,10 @@ Elementum nibh tellus molestie nunc non blandit massa.""");
         stage.setScene(scene);
     }
 
+    /**
+     * Event handler for the cancel button click event.
+     * Closes the application window.
+     */
     @FXML
     protected void onCancelButtonClick() {
         Stage stage = (Stage) nextButton.getScene().getWindow();

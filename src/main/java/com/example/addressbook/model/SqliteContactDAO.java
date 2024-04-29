@@ -4,14 +4,24 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Implementation of the contact data access object (DAO) for SQLite databases.
+ */
 public class SqliteContactDAO implements IContactDAO {
     private Connection connection;
 
+    /**
+     * Constructor for the SQLite contact DAO.
+     * Initializes the database connection and creates the contacts table if it does not exist.
+     */
     public SqliteContactDAO() {
         connection = SqliteConnection.getInstance();
         createTable();
     }
 
+    /**
+     * Creates the contacts table if it does not exist in the database.
+     */
     private void createTable() {
         // Create table if not exists
         try {
@@ -29,6 +39,10 @@ public class SqliteContactDAO implements IContactDAO {
         }
     }
 
+    /**
+     * Adds a contact to the database.
+     * @param contact The contact to add.
+     */
     @Override
     public void addContact(Contact contact) {
         try {
@@ -47,6 +61,11 @@ public class SqliteContactDAO implements IContactDAO {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Updates a contact in the database.
+     * @param contact The contact to update.
+     */
     @Override
     public void updateContact(Contact contact) {
         try {
@@ -62,6 +81,10 @@ public class SqliteContactDAO implements IContactDAO {
         }
     }
 
+    /**
+     * Deletes a contact from the database.
+     * @param contact The contact to delete.
+     */
     @Override
     public void deleteContact(Contact contact) {
         try {
@@ -73,6 +96,11 @@ public class SqliteContactDAO implements IContactDAO {
         }
     }
 
+    /**
+     * Retrieves a contact from the database by ID.
+     * @param id The ID of the contact to retrieve.
+     * @return The contact with the specified ID, or null if not found.
+     */
     @Override
     public Contact getContact(int id) {
         try {
@@ -94,6 +122,10 @@ public class SqliteContactDAO implements IContactDAO {
         return null;
     }
 
+    /**
+     * Retrieves all contacts from the database.
+     * @return A list containing all contacts in the database.
+     */
     @Override
     public List<Contact> getAllContacts() {
         List<Contact> contacts = new ArrayList<>();
